@@ -1,4 +1,3 @@
 #!/bin/bash
+docker build -t srihariops/guvi_reactapp_dev .
 
-echo "Build the React app"
-sudo docker build -t guvi-project-react-app . 
