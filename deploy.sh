@@ -1,4 +1,3 @@
 #!/bin/bash
 
-docker-compose down
-docker-compose up -d --build
+docker run -d --name guvi-project-react-app -p 80:80 react-app-guvi
