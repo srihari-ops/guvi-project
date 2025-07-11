@@ -38,7 +38,7 @@ pipeline {
     stage('Push to Prod Repo') {
       when {
         expression {
-          env.BRANCH_NAME == 'master'
+          env.BRANCH_NAME == 'main'
         }
       }
       steps {
