@@ -1,3 +1,4 @@
 #!/bin/bash
-docker build -t devops-static-app .
+
+sudo docker build -t devops-static-app .
 
