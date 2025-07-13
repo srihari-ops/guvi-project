@@ -2,6 +2,7 @@ pipeline {
   agent any
 
   environment {
+    BRANCH_NAME = "${env.GIT_BRANCH.replaceFirst(/^origin\\//, '')}"
     DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
   }
 
@@ -25,13 +26,12 @@ pipeline {
         }
       }
       steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-          sh '''
-            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-            docker tag devops-static-app srihariops/guvi-project-dev:latest
-            docker push srihariops/guvi-project-dev:latest
-          '''
-        }
+        echo "Pushing to Dev Repo..."
+        sh '''
+          echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u "$DOCKERHUB_CREDENTIALS_USR" --password-stdin
+          docker tag devops-static-app srihariops/guvi-project-dev:latest
+          docker push srihariops/guvi-project-dev:latest
+        '''
       }
     }
 
@@ -42,13 +42,12 @@ pipeline {
         }
       }
       steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-          sh '''
-            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-            docker tag devops-static-app srihariops/guvi-project-prod:latest
-            docker push srihariops/guvi-project-prod:latest
-          '''
-        }
+        echo "Pushing to Prod Repo..."
+        sh '''
+          echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u "$DOCKERHUB_CREDENTIALS_USR" --password-stdin
+          docker tag devops-static-app srihariops/guvi-project-prod:latest
+          docker push srihariops/guvi-project-prod:latest
+        '''
       }
     }
 
@@ -59,4 +58,3 @@ pipeline {
         }
   }
 }
-
