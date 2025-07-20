@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
-        git branch: 'dev', url: 'https://github.com/srihari-ops/devops-build.git'
+        git branch: 'dev', url: 'https://github.com/srihari-ops/guvi-project.git'
       }
     }
     stage('Build Image') {
