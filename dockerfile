@@ -5,7 +5,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy source files
-COPY /devops-build/build/ /usr/share/nginx/html
+COPY build/ /usr/share/nginx/html
 
 # Serve the app using Nginx
 FROM nginx:alpine
